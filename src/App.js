@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Layout from "./components/Layout/Layout";
+import { queries } from "./actions/queries";
+import { connect } from "react-redux";
 
-function App() {
+import "./App.css";
+
+function App({queries}) {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Layout>
+        Here goes the questions
+        {/* {queries.map(query => (
+          <>
+            <div>{query.question}</div>
+            <div>{query.answer ? query.answer : null}</div>
+          </>
+        ))} */}
+      </Layout>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  queries: state.queries
+});
+
+const mapDispatchToProps = dispatch => ({
+  queries: () => dispatch(queries())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
