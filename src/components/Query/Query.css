@@ -1,0 +1,9 @@
+.question {
+    border-radius: 5px 5px 0;
+    padding: 10px;
+}
+
+.answer {
+    border-radius: 0px 5px 5px;
+    padding: 10px;
+}

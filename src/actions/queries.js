@@ -1,6 +1,6 @@
-export const queries = queries => dispatch => {
+export const setQueries = queries => dispatch => {
   dispatch({
     type: "QUERIES",
-    payload: { queries }
+    payload: queries
   });
 };

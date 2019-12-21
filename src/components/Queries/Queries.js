@@ -1,15 +1,45 @@
-import React from "react";
+/* eslint-disable jsx-a11y/accessible-emoji */
+import React, { useState } from "react";
+import Query from "../Query/Query";
+import { setQueries } from "../../actions/queries";
+import { useDispatch } from "react-redux";
+import "./Queries.css";
 
 const Queries = ({ queries }) => {
-  return (
-    <>
-      {queries.map((query, index) => (
+  const [isHovered, setHovered] = useState(false);
+  const dispatch = useDispatch();
+  const sortQuestions = () => {
+    const sortedQueries = queries;
+    sortedQueries.sort((a, b) => (a.question > b.question ? 1 : -1));
+    dispatch(setQueries(sortedQueries));
+  };
+
+  const removeQuestions = () => {
+    dispatch(setQueries([]));
+  };
+  return queries.length ? (
+    queries.map((query, index) => (
+      <>
+        <h3
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+        >
+          Created questions
+        </h3>
+        {isHovered ? <div className="tooltip">this is a tooltip</div> : null}
         <div key={index}>
-          <div>{query.question}</div>
-          <div>{query.answer ? query.answer : null}</div>
+          <Query query={query} />
         </div>
-      ))}
-    </>
+        <div className="buttons">
+          <button onClick={sortQuestions}>Sort questions</button>
+          <button onClick={removeQuestions}>Remove questions</button>
+        </div>
+      </>
+    ))
+  ) : (
+    <div>
+      No questions yet <span>☹️</span>
+    </div>
   );
 };
 
