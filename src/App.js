@@ -1,21 +1,19 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
+import Queries from "./components/Queries/Queries";
+import QueryInput from "./components/QueryInput/QueryInput";
 import { queries } from "./actions/queries";
 import { connect } from "react-redux";
 
 import "./App.css";
 
-function App({queries}) {
+function App({ queries }) {
   return (
     <div className="App">
       <Layout>
-        Here goes the questions
-        {/* {queries.map(query => (
-          <>
-            <div>{query.question}</div>
-            <div>{query.answer ? query.answer : null}</div>
-          </>
-        ))} */}
+        The awesome Q/A tool
+        <Queries queries={queries} />
+        <QueryInput />
       </Layout>
     </div>
   );
@@ -26,7 +24,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  queries: () => dispatch(queries())
+  queriesDispatch: () => dispatch(queries())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
