@@ -18,24 +18,28 @@ const Queries = ({ queries }) => {
     dispatch(setQueries([]));
   };
   return queries.length ? (
-    queries.map((query, index) => (
-      <>
-        <h3
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          Created questions
-        </h3>
-        {isHovered ? <div className="tooltip">this is a tooltip</div> : null}
-        <div key={index}>
-          <Query query={query} />
-        </div>
-        <div className="buttons">
-          <button onClick={sortQuestions}>Sort questions</button>
-          <button onClick={removeQuestions}>Remove questions</button>
-        </div>
-      </>
-    ))
+    <div className="queries">
+      <h3
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        Created questions
+      </h3>
+      {queries.map((query, index) => (
+        <>
+          {isHovered ? (
+            <div>Here you can find the created questions and their answers</div>
+          ) : null}
+          <div className="row justify-content-center" key={index}>
+            <Query query={query} />
+          </div>
+        </>
+      ))}
+      <div className="buttons">
+        <button onClick={sortQuestions}>Sort questions</button>
+        <button onClick={removeQuestions}>Remove questions</button>
+      </div>
+    </div>
   ) : (
     <div>
       No questions yet <span>☹️</span>
