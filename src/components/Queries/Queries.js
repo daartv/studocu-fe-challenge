@@ -41,7 +41,7 @@ const Queries = ({ queries }) => {
       </div>
     </div>
   ) : (
-    <div>
+    <div className="empty">
       No questions yet <span>☹️</span>
     </div>
   );
